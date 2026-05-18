@@ -313,3 +313,39 @@
   border-radius: 14px;
   background: rgba(239, 68, 68, 0.12);
 }
+
+.game-actions {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game-actions button {
+  padding: 7px 11px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #a855f7, #6d28d9);
+  color: white;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.game-actions button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.35);
+}
+
+.cart-message {
+  margin-bottom: 18px;
+  padding: 14px 18px;
+  border: 1px solid rgba(168, 85, 247, 0.45);
+  border-radius: 14px;
+  background: rgba(168, 85, 247, 0.16);
+  color: #ddd6fe;
+  font-weight: 800;
+  text-align: center;
+  box-shadow: 0 0 18px rgba(168, 85, 247, 0.18);
+}

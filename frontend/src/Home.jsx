@@ -9,6 +9,7 @@ function Home() {
   const [busqueda, setBusqueda] = useState("");
   const [genero, setGenero] = useState("Todos");
   const [precio, setPrecio] = useState("Todos");
+  const [mensaje, setMensaje] = useState("");
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -22,6 +23,42 @@ function Home() {
   const logout = () => {
     localStorage.removeItem("user");
     navigate("/");
+  };
+
+  const agregarAlCarrito = async (juegoId) => {
+    if (!user) {
+      navigate("/");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/api/cart/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          usuario_id: user.id,
+          juego_id: juegoId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMensaje(data.error || "No se pudo agregar al carrito");
+        return;
+      }
+
+      setMensaje(data.message);
+
+      setTimeout(() => {
+        setMensaje("");
+      }, 2500);
+    } catch (error) {
+      console.error(error);
+      setMensaje("Error al conectar con el carrito");
+    }
   };
 
   const generos = ["Todos", ...new Set(juegos.map((juego) => juego.genero))];
@@ -84,9 +121,18 @@ function Home() {
 
           <div className="user-box">
             <span>{user?.nombre || "Gamer"}</span>
-            <button onClick={logout}>Salir</button>
+
+            <button onClick={() => navigate("/cart")}>
+              Carrito
+            </button>
+
+            <button onClick={logout}>
+              Salir
+            </button>
           </div>
         </header>
+
+        {mensaje && <div className="cart-message">{mensaje}</div>}
 
         <section className="library-header">
           <div>
@@ -131,9 +177,16 @@ function Home() {
                 <div className="game-overlay">
                   <h3>{juego.nombre}</h3>
                   <p>{juego.genero}</p>
-                  <strong>
-                    {juego.precio === 0 ? "Gratis" : `$${juego.precio}`}
-                  </strong>
+
+                  <div className="game-actions">
+                    <strong>
+                      {juego.precio === 0 ? "Gratis" : `$${juego.precio}`}
+                    </strong>
+
+                    <button onClick={() => agregarAlCarrito(juego.id)}>
+                      Agregar
+                    </button>
+                  </div>
                 </div>
               </article>
             ))

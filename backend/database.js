@@ -40,7 +40,7 @@ db.run(`
 // ======================
 // INSERTAR JUEGOS DE PRUEBA
 // ======================
- db.run("DELETE FROM juegos");
+ //db.run("DELETE FROM juegos");
 const juegosIniciales = [
   {
     nombre: "EA Sports FC 26",
@@ -279,4 +279,49 @@ db.get("SELECT COUNT(*) AS total FROM juegos", (err, row) => {
     console.log("Juegos insertados correctamente");
   }
 });
+
+// ======================
+// TABLA CARRITO
+// ======================
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS carrito (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario_id INTEGER NOT NULL,
+    juego_id INTEGER NOT NULL,
+    cantidad INTEGER DEFAULT 1,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (juego_id) REFERENCES juegos(id)
+  )
+`);
+
+// ======================
+// TABLA COMPRAS
+// ======================
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS compras (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario_id INTEGER NOT NULL,
+    total REAL NOT NULL,
+    fecha TEXT DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
+  )
+`);
+
+// ======================
+// TABLA DETALLE COMPRAS
+// ======================
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS detalle_compras (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    compra_id INTEGER NOT NULL,
+    juego_id INTEGER NOT NULL,
+    cantidad INTEGER NOT NULL,
+    precio_unitario REAL NOT NULL,
+    FOREIGN KEY (compra_id) REFERENCES compras(id),
+    FOREIGN KEY (juego_id) REFERENCES juegos(id)
+  )
+`);
 module.exports = db;
