@@ -1,0 +1,186 @@
+.admin-page {
+    min-height: 100vh;
+    padding: 30px;
+    background:
+        linear-gradient(rgba(4, 4, 14, 0.88), rgba(4, 4, 14, 0.96)),
+        url("./assets/fondo.png");
+    background-size: cover;
+    color: white;
+}
+
+.admin-header {
+    margin-bottom: 28px;
+    padding: 22px;
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    border-radius: 18px;
+    background: rgba(10, 10, 25, 0.82);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-header h1 {
+    font-size: 34px;
+}
+
+.admin-header p {
+    color: #cfc7e8;
+}
+
+.admin-header button,
+.admin-form-actions button,
+.admin-actions button {
+    padding: 12px 16px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #a855f7, #6d28d9);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-message {
+    margin-bottom: 22px;
+    padding: 14px;
+    border-radius: 12px;
+    background: rgba(168, 85, 247, 0.16);
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    text-align: center;
+    font-weight: 800;
+}
+
+.admin-form-card,
+.admin-list {
+    margin-bottom: 28px;
+    padding: 24px;
+    border: 1px solid rgba(168, 85, 247, 0.28);
+    border-radius: 18px;
+    background: rgba(10, 10, 25, 0.82);
+}
+
+.admin-form-card h2,
+.admin-list h2 {
+    margin-bottom: 18px;
+}
+
+.admin-form {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-form input,
+.admin-form textarea {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(168, 85, 247, 0.35);
+    background: rgba(25, 29, 50, 0.9);
+    color: white;
+    font-weight: 700;
+    outline: none;
+}
+
+.admin-form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+    border-color: #c084fc;
+    box-shadow: 0 0 18px rgba(168, 85, 247, 0.22);
+}
+
+.admin-form-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.admin-form-actions button:nth-child(2),
+.admin-actions button:nth-child(2) {
+    background: rgba(239, 68, 68, 0.85);
+}
+
+.admin-table {
+    display: grid;
+    gap: 14px;
+}
+
+.admin-game-row {
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(168, 85, 247, 0.22);
+    background: rgba(255, 255, 255, 0.04);
+    display: grid;
+    grid-template-columns: 180px 1fr auto;
+    align-items: center;
+    gap: 18px;
+}
+
+.admin-game-row img {
+    width: 180px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.admin-game-info h3 {
+    margin-bottom: 5px;
+}
+
+.admin-game-info p {
+    color: #d8b4fe;
+    margin-bottom: 6px;
+}
+
+.admin-game-info strong {
+    color: #c084fc;
+}
+
+.admin-actions {
+    display: flex;
+    gap: 10px;
+}
+
+@media (max-width: 800px) {
+    .admin-header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+    }
+
+    .admin-game-row {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-game-row img {
+        width: 100%;
+        height: 150px;
+    }
+
+    .admin-actions {
+        flex-direction: column;
+    }
+
+    .image-preview-box {
+        margin-top: 6px;
+        padding: 14px;
+        border-radius: 14px;
+        border: 1px solid rgba(168, 85, 247, 0.28);
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .image-preview-box p {
+        margin-bottom: 10px;
+        color: #d8b4fe;
+        font-weight: 800;
+    }
+
+    .image-preview-box img {
+        width: 320px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 12px;
+        display: block;
+    }
+}

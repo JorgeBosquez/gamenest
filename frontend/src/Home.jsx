@@ -115,20 +115,26 @@ function Home() {
         <header className="topbar">
           <nav>
             <span className="active">STORE</span>
-            <span>LIBRARY</span>
+
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/library")}
+            >
+              LIBRARY
+            </span>
+
             <span>COMMUNITY</span>
           </nav>
-
           <div className="user-box">
             <span>{user?.nombre || "Gamer"}</span>
 
-            <button onClick={() => navigate("/cart")}>
-              Carrito
-            </button>
+            <button onClick={() => navigate("/cart")}>Carrito</button>
 
-            <button onClick={logout}>
-              Salir
-            </button>
+            {user?.correo === "admingamenest@gmail.com" && (
+              <button onClick={() => navigate("/admin")}>Admin</button>
+            )}
+
+            <button onClick={logout}>Salir</button>
           </div>
         </header>
 
