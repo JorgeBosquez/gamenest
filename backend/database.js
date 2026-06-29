@@ -324,4 +324,19 @@ db.run(`
     FOREIGN KEY (juego_id) REFERENCES juegos(id)
   )
 `);
+// ======================
+// TABLA FAVORITOS
+// ======================
+
+db.run(`
+  CREATE TABLE IF NOT EXISTS favoritos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    usuario_id INTEGER NOT NULL,
+    juego_id INTEGER NOT NULL,
+    fecha TEXT DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(usuario_id, juego_id),
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
+    FOREIGN KEY (juego_id) REFERENCES juegos(id)
+  )
+`);
 module.exports = db;

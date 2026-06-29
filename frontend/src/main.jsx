@@ -7,6 +7,7 @@ import Home from "./Home.jsx";
 import Cart from "./Cart.jsx";
 import Admin from "./Admin.jsx";
 import Library from "./Library.jsx";
+import Favorites from "./Favorites.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -16,6 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/cart" element={<Cart />} />
       <Route path="/admin" element={<Admin />} />
       <Route path="/library" element={<Library />} />
+      <Route path="/favorites" element={<Favorites />} />
     </Routes>
   </BrowserRouter>
 );

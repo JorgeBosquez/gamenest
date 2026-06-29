@@ -60,7 +60,41 @@ function Home() {
       setMensaje("Error al conectar con el carrito");
     }
   };
+  const agregarAFavoritos = async (juegoId) => {
+    if (!user) {
+      navigate("/");
+      return;
+    }
 
+    try {
+      const response = await fetch("http://localhost:3000/api/favorites/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          usuario_id: user.id,
+          juego_id: juegoId,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMensaje(data.error || "No se pudo agregar a favoritos");
+        return;
+      }
+
+      setMensaje(data.message);
+
+      setTimeout(() => {
+        setMensaje("");
+      }, 2500);
+    } catch (error) {
+      console.error(error);
+      setMensaje("Error al conectar con favoritos");
+    }
+  };
   const generos = ["Todos", ...new Set(juegos.map((juego) => juego.genero))];
 
   const juegosFiltrados = juegos.filter((juego) => {
@@ -123,6 +157,13 @@ function Home() {
               LIBRARY
             </span>
 
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate("/favorites")}
+            >
+              FAVORITOS
+            </span>
+
             <span>COMMUNITY</span>
           </nav>
           <div className="user-box">
@@ -183,15 +224,23 @@ function Home() {
                 <div className="game-overlay">
                   <h3>{juego.nombre}</h3>
                   <p>{juego.genero}</p>
-
                   <div className="game-actions">
                     <strong>
                       {juego.precio === 0 ? "Gratis" : `$${juego.precio}`}
                     </strong>
 
-                    <button onClick={() => agregarAlCarrito(juego.id)}>
-                      Agregar
-                    </button>
+                    <div className="game-buttons">
+                      <button
+                        className="favorite-btn"
+                        onClick={() => agregarAFavoritos(juego.id)}
+                      >
+                        ❤️
+                      </button>
+
+                      <button onClick={() => agregarAlCarrito(juego.id)}>
+                        Agregar
+                      </button>
+                    </div>
                   </div>
                 </div>
               </article>
